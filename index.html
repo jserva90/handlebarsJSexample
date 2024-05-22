@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Handlebars Example</title>
+    <style>
+      header,
+      footer {
+        background-color: #f8f9fa;
+        padding: 1em;
+        text-align: center;
+      }
+      main {
+        padding: 2em;
+      }
+      nav {
+        text-align: center;
+        margin-bottom: 1em;
+      }
+      nav button {
+        margin: 0 0.5em;
+        padding: 0.5em 1em;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <nav id="navigation"></nav>
+
+    <main id="content">
+      <!-- Handlebars content will be injected here -->
+    </main>
+
+    <footer id="footer"></footer>
+
+    <!-- Include Handlebars from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
