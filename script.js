@@ -1,38 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-  function loadPartial(partialName) {
+  const loadPartial = (partialName) => {
     return fetch(`templates/partials/${partialName}.html`)
       .then((response) => response.text())
       .then((templateSource) => {
         Handlebars.registerPartial(partialName, templateSource);
       });
-  }
+  };
 
-  function loadTemplate(templateName, context) {
+  const loadTemplate = (templateName, context) => {
     fetch(`templates/${templateName}.html`)
       .then((response) => response.text())
       .then((templateSource) => {
-        // Compile the template
-        var template = Handlebars.compile(templateSource);
-
-        // Render the template with the data
-        var html = template(context);
-
-        // Insert the rendered HTML into the main content area
+        const template = Handlebars.compile(templateSource);
+        const html = template(context);
         document.getElementById("content").innerHTML = html;
       })
       .catch((error) => console.error("Error loading the template:", error));
-  }
+  };
 
-  function loadAndRenderPartial(partialName, elementId) {
+  const loadAndRenderPartial = (partialName, elementId) => {
     return fetch(`templates/partials/${partialName}.html`)
       .then((response) => response.text())
       .then((templateSource) => {
-        var template = Handlebars.compile(templateSource);
+        const template = Handlebars.compile(templateSource);
         document.getElementById(elementId).innerHTML = template();
       });
-  }
+  };
 
-  function initializePartials() {
+  const initializePartials = () => {
     return Promise.all([
       loadPartial("header"),
       loadPartial("footer"),
@@ -45,21 +40,22 @@ document.addEventListener("DOMContentLoaded", function () {
         loadAndRenderPartial("navigation", "navigation"),
       ]);
     });
-  }
+  };
 
   // Register a helper
-  Handlebars.registerHelper("uppercase", function (str) {
+  Handlebars.registerHelper("uppercase", (str) => {
     return str.toUpperCase();
   });
 
   // Event listeners for buttons
   document
     .getElementById("navigation")
-    .addEventListener("click", function (event) {
+    .addEventListener("click", (event) => {
       if (event.target.id === "home-btn") {
-        var context = {
+        const context = {
           title: "Welcome to My Website",
-          body: "This is a dynamically generated content area using Handlebars.",
+          body:
+            "This is a dynamically generated content area using Handlebars.",
           persons: [
             { name: "John", age: 30 },
             { name: "Jane", age: 25 },
@@ -68,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         loadTemplate("main-content", context);
       } else if (event.target.id === "about-btn") {
-        var context = {
+        const context = {
           title: "About Us",
           description:
             "We are a company that values excellence and innovation.",
